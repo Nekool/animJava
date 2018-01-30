@@ -13,12 +13,15 @@ public class objetCarre {
 
     private int thisHeight= 50;
     private RandomColor couleur=new RandomColor();
-    private Color myColor=couleur.CreateRandomColor();
+    private Color myColor=this.getMyColor();
     public int getSpeedX() {
         return speedX;
     }
     public void setMyColor(){
-        this.myColor=couleur.CreateRandomColor();
+        this.myColor=couleur.CreateRandomColor(256);
+    }
+    public Color getMyColor(){
+        return couleur.CreateRandomColor(256);
     }
     public void setSpeedX() {
         int Low = 1;
@@ -27,7 +30,7 @@ public class objetCarre {
         if(this.speedX>0){
             Result=Result*(-1);
             this.speedX = Result;
-
+            this.setMyColor();
         }
         else{
             this.speedX = Result;
@@ -45,7 +48,7 @@ public class objetCarre {
         if(this.speedY>0){
             Result=Result*(-1);
             this.speedY = Result;
-
+            this.setMyColor();
         }
         else{
             this.speedY = Result;
