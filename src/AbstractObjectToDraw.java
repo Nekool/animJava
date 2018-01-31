@@ -1,19 +1,20 @@
 import java.awt.*;
 import java.util.Random;
 import java.awt.Color;
-public class objetCarre {
-    private int posX = 1;
-    private int speedX = 1;
+abstract class AbstractObjectToDraw{
+    private int posX ;
+    private int speedX ;
 
-    private int posY = 1;
-    private int speedY = 1;
+    private int posY ;
+    private int speedY ;
 
     private int thisWith = 50;
-    Random r = new Random();
-
     private int thisHeight= 50;
-    private RandomColor couleur=new RandomColor();
-    private Color myColor=this.getMyColor();
+
+    private Random r;
+    private Color myColor;
+    private RandomColor couleur;
+
     public int getSpeedX() {
         return speedX;
     }
@@ -85,17 +86,19 @@ public class objetCarre {
     public void setThisHeight(int thisHeight) {
         this.thisHeight = thisHeight;
     }
-    public objetCarre(int thisHeight,int thisWith,int posX,int posY){
+
+    public AbstractObjectToDraw(int thisHeight,int thisWith,int posX,int posY){
+
         this.thisHeight=thisHeight;
         this.thisWith=thisWith;
         this.posX=posX;
         this.posY=posY;
+        this.couleur=new RandomColor();
+        this.myColor=this.getMyColor();
         setSpeedX();
         setSpeedY();
-
     }
     public void  drawMe(Graphics g){
-        g.setColor(myColor);
-        g.fillRect(this.posX, this.posY, this.thisHeight, this.thisWith);
+
     }
 }

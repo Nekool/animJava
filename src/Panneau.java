@@ -5,37 +5,39 @@ import java.util.List;
 import javax.swing.JPanel;
 
 public class Panneau extends JPanel {
-//    objetCarre monCarre  = new objetCarre(50,50,200 ,500);
-//    objetCarre monCarre2 = new objetCarre(50,50,350 ,100);
-//    objetCarre monCarre3 = new objetCarre(50,50,150 ,200);
-//    objetCarre monCarre4 = new objetCarre(50,50,200 ,300);
     int i;
-    public List<objetCarre> carres = new ArrayList<>();
-    //public void addcarres(){
-//        carres.add(monCarre);
-//        carres.add(monCarre2);
-//        carres.add(monCarre3);
-//        carres.add(monCarre4);
-   // }
 
-    public void mouseClicked(MouseEvent e) {
-        i++;
+    private List<AbstractObjectToDraw> objetDessins = new ArrayList<>();
+    private List<ObjetCercle> cercles = new ArrayList<>();
+    private List<ObjetCarre> carres = new ArrayList<>();
+
+    public List<ObjetCarre> getCarres() {
+        return carres;
+    }
+    public List<ObjetCercle> getCercles() {
+        return cercles;
+    }
+    public List<AbstractObjectToDraw> getObjetDessins() {
+        return objetDessins;
     }
     public void paintComponent(Graphics g){
 
         g.setColor(Color.black);
 
         g.fillRect(0,0,this.getWidth(),this.getHeight());
+
         int xdrawString=10;
         int ydrawString=20;
-        for (objetCarre mon_objet : carres) {
+        for (AbstractObjectToDraw mon_objet : this.carres) {
             mon_objet.drawMe(g);
 //            System.out.println("dessine");
             g.setColor(Color.red);
             g.drawString(mon_objet.getPosX()+" "+ mon_objet.getPosY(), xdrawString, ydrawString);
             ydrawString+=15;
+
         }
-        g.drawString(Integer.toString(i), 10, 120);
+        i=carres.size();
+        g.drawString(Integer.toString(i), 100, 20);
 
     }
 

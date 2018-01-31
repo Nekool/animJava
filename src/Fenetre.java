@@ -1,27 +1,22 @@
-
-import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.ArrayList;
 import javax.swing.*;
 
 
 public class Fenetre extends JFrame{
     private Panneau pan = new Panneau();
-    JButton bouton = new ObjetBouton("Click",pan.carres);
-
+    JButton bouton = new ObjetBouton("Création",pan.getCarres());
+    JButton boutonSupr = new ObjetBoutonSupr("Supression",pan.getCarres());
 
     public Fenetre(){
         this.setTitle("Animation");
-//        this.setSize(800, 800);
+        this.setLayout(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         this.setContentPane(pan);
         this.setVisible(true);
-//        pan.addcarres();
         pan.add(bouton);
-
+        pan.add(boutonSupr);
+        pan.setSize(this.getWidth(),this.getHeight());
         go();
 
     }
@@ -29,10 +24,8 @@ public class Fenetre extends JFrame{
         int deplacementX =2,deplacementY=1;
         System.out.println("debut boucle");
         for(int i = 0; i <1; i--){
-
             try {
-//                System.out.println("check colision");
-                for (objetCarre mon_objet : pan.carres) {
+                for (AbstractObjectToDraw mon_objet : pan.getCarres()) {
                     if(mon_objet.getPosX()+mon_objet.getThisHeight()>=this.getHeight()||mon_objet.getPosX()<=0){
                         mon_objet.setSpeedX();
                     }
@@ -42,8 +35,9 @@ public class Fenetre extends JFrame{
                     mon_objet.setPosX(mon_objet.getPosX()+mon_objet.getSpeedX());
                     mon_objet.setPosY(mon_objet.getPosY()+mon_objet.getSpeedY());
                     pan.repaint();
+
                 }
-                Thread.sleep(10);
+                Thread.sleep(1000/60);
 
             } catch (InterruptedException e) {
                 e.printStackTrace();

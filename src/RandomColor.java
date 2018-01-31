@@ -3,9 +3,10 @@ import java.awt.Color;
 public class RandomColor {
 
      Color CreateRandomColor(int limit){
-        int R = (int)(Math.random()*limit);
-        int G = (int)(Math.random()*limit);
-        int B = (int)(Math.random()*limit);
+         Random randomGenerator = new Random();
+        int R = randomGenerator.nextInt(limit);
+        int G = randomGenerator.nextInt(limit);
+        int B = randomGenerator.nextInt(limit);
         Color couleur = new Color(R, G, B);
 
         return couleur;
