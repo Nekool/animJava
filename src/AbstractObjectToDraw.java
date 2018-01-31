@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.util.Random;
 import java.awt.Color;
-abstract class AbstractObjectToDraw{
+abstract class AbstractObjectToDraw implements InterfaceObjectToDraw{
     private int posX ;
     private int speedX ;
 
@@ -19,6 +19,7 @@ abstract class AbstractObjectToDraw{
         return speedX;
     }
     public void setMyColor(){
+
         this.myColor=couleur.CreateRandomColor(256);
     }
     public Color getMyColor(){
@@ -87,7 +88,7 @@ abstract class AbstractObjectToDraw{
         this.thisHeight = thisHeight;
     }
 
-    public AbstractObjectToDraw(int thisHeight,int thisWith,int posX,int posY){
+    public void ObjectToDraw(int thisHeight,int thisWith,int posX,int posY){
 
         this.thisHeight=thisHeight;
         this.thisWith=thisWith;

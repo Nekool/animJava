@@ -5,30 +5,24 @@ import java.util.List;
 import javax.swing.JPanel;
 
 public class Panneau extends JPanel {
-    int i;
 
-    private List<AbstractObjectToDraw> objetDessins = new ArrayList<>();
-    private List<ObjetCercle> cercles = new ArrayList<>();
-    private List<ObjetCarre> carres = new ArrayList<>();
+    private int i;
 
-    public List<ObjetCarre> getCarres() {
+    public List<AbstractObjectToDraw> getCarres() {
+
         return carres;
     }
-    public List<ObjetCercle> getCercles() {
-        return cercles;
-    }
-    public List<AbstractObjectToDraw> getObjetDessins() {
-        return objetDessins;
-    }
+
+    private List<AbstractObjectToDraw> carres = new ArrayList<>();
+
     public void paintComponent(Graphics g){
 
         g.setColor(Color.black);
 
         g.fillRect(0,0,this.getWidth(),this.getHeight());
-
         int xdrawString=10;
         int ydrawString=20;
-        for (AbstractObjectToDraw mon_objet : this.carres) {
+        for (AbstractObjectToDraw mon_objet : carres) {
             mon_objet.drawMe(g);
 //            System.out.println("dessine");
             g.setColor(Color.red);

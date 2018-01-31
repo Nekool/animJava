@@ -3,8 +3,8 @@ import java.util.Random;
 import java.awt.Color;
 public class ObjetCarre extends AbstractObjectToDraw{
 
-    public ObjetCarre(int thisHeight,int thisWith,int posX,int posY) {
-        super(thisHeight, thisWith, posX, posY);
+    ObjetCarre(int thisHeight,int thisWith,int posX,int posY) {
+//        super(thisHeight, thisWith, posX, posY);
         System.out.println("ajout carre");
 
     }
