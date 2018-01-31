@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.Random;
 
 
-public class ObjetBouton extends JButton implements MouseListener{
+public class ObjetBoutonAjoutCarre extends JButton implements MouseListener{
     private String name;
     private List liste;
-    public ObjetBouton(String str ,List liste){
+    public ObjetBoutonAjoutCarre(String str ,List liste){
         super(str);
         this.liste=liste;
         this.name = "creation";
@@ -18,6 +18,7 @@ public class ObjetBouton extends JButton implements MouseListener{
     public void mouseClicked(MouseEvent event) {
         Random r1 = new Random();
         Random r2 = new Random();
+//        ObjetCarre carre=new ObjetCarre(50,50,5 ,5);
         int intr1 =r1.nextInt(900-100) + 100;
         int intr2 =r2.nextInt(900-100) + 100;
         this.liste.add(new ObjetCarre(50,50,intr1 ,intr2));

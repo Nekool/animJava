@@ -3,7 +3,8 @@ import javax.swing.*;
 
 public class Fenetre extends JFrame{
     private Panneau pan = new Panneau();
-    JButton bouton = new ObjetBouton("Création",pan.getCarres());
+    JButton boutonCarre = new ObjetBoutonAjoutCarre("Création",pan.getCarres());
+    JButton boutonCercle = new ObjetBoutonAjoutCercle("Création",pan.getCarres());
     JButton boutonSupr = new ObjetBoutonSupr("Supression",pan.getCarres());
 
     public Fenetre(){
@@ -14,7 +15,8 @@ public class Fenetre extends JFrame{
         this.setLocationRelativeTo(null);
         this.setContentPane(pan);
         this.setVisible(true);
-        pan.add(bouton);
+        pan.add(boutonCarre);
+        pan.add(boutonCercle);
         pan.add(boutonSupr);
         pan.setSize(this.getWidth(),this.getHeight());
         go();

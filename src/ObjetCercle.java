@@ -1,9 +1,9 @@
 import java.awt.*;
 import java.util.Random;
 import java.awt.Color;
-public class ObjetCarre extends AbstractObjectToDraw{
+public class ObjetCercle extends AbstractObjectToDraw{
 
-    ObjetCarre(int thisHeight,int thisWith,int posX,int posY) {
+    ObjetCercle(int thisHeight,int thisWith,int posX,int posY) {
         this.setThisHeight(thisHeight);
         this.setThisWith(thisWith);
         this.setPosX(posX);
@@ -17,6 +17,6 @@ public class ObjetCarre extends AbstractObjectToDraw{
 
     public void  drawMe(Graphics g){
         g.setColor(this.getMyColor());
-        g.fillRect(this.getPosX(), this.getPosY(), this.getThisHeight(), this.getThisWith());
+        g.fillOval(this.getPosX(), this.getPosY(), this.getThisHeight(), this.getThisWith());
     }
 }

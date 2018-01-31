@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.util.Random;
 import java.awt.Color;
+
 abstract class AbstractObjectToDraw implements InterfaceObjectToDraw{
     private int posX ;
     private int speedX ;
@@ -8,12 +9,20 @@ abstract class AbstractObjectToDraw implements InterfaceObjectToDraw{
     private int posY ;
     private int speedY ;
 
-    private int thisWith = 50;
-    private int thisHeight= 50;
+    private int thisWith;
+    private int thisHeight;
 
     private Random r;
     private Color myColor;
     private RandomColor couleur;
+
+    public void setR() {
+        this.r = new Random();
+    }
+
+    public void setCouleur() {
+        this.couleur = new RandomColor();
+    }
 
     public int getSpeedX() {
         return speedX;
@@ -23,12 +32,13 @@ abstract class AbstractObjectToDraw implements InterfaceObjectToDraw{
         this.myColor=couleur.CreateRandomColor(256);
     }
     public Color getMyColor(){
-        return couleur.CreateRandomColor(256);
+        return myColor;
     }
+
     public void setSpeedX() {
         int Low = 1;
         int High = 5;
-        int Result = r.nextInt(High-Low) + Low;
+        int Result = this.r.nextInt(High-Low) + Low;
         if(this.speedX>0){
             Result=Result*(-1);
             this.speedX = Result;
@@ -89,15 +99,15 @@ abstract class AbstractObjectToDraw implements InterfaceObjectToDraw{
     }
 
     public void ObjectToDraw(int thisHeight,int thisWith,int posX,int posY){
-
-        this.thisHeight=thisHeight;
-        this.thisWith=thisWith;
-        this.posX=posX;
-        this.posY=posY;
-        this.couleur=new RandomColor();
-        this.myColor=this.getMyColor();
-        setSpeedX();
-        setSpeedY();
+        this.setThisHeight(thisHeight);
+        this.setThisWith(thisWith);
+        this.setPosX(posX);
+        this.setPosY(posY);
+        this.setR();
+        this.setCouleur();
+        this.getMyColor();
+        this.setSpeedX();
+        this.setSpeedY();
     }
     public void  drawMe(Graphics g){
 
