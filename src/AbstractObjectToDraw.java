@@ -39,10 +39,10 @@ abstract class AbstractObjectToDraw implements InterfaceObjectToDraw{
         int Low = 1;
         int High = 5;
         int Result = this.r.nextInt(High-Low) + Low;
-        if(this.speedX>0){
+        if(this.speedX>0&& this.getPosX()>0){
             Result=Result*(-1);
             this.speedX = Result;
-            this.setMyColor();
+//            this.setMyColor();
         }
         else{
             this.speedX = Result;
@@ -57,10 +57,10 @@ abstract class AbstractObjectToDraw implements InterfaceObjectToDraw{
         int Low = 1;
         int High = 5;
         int Result = r.nextInt(High-Low) + Low;
-        if(this.speedY>0){
+        if(this.speedY>0 && this.getPosY()>0){
             Result=Result*(-1);
             this.speedY = Result;
-            this.setMyColor();
+//            this.setMyColor();
         }
         else{
             this.speedY = Result;

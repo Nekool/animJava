@@ -1,4 +1,7 @@
 import javax.swing.*;
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
@@ -20,9 +23,14 @@ public class ObjetBoutonAjoutCercle extends JButton implements MouseListener{
     public void mouseClicked(MouseEvent event) {
         Random r1 = new Random();
         Random r2 = new Random();
-        int intr1 =r1.nextInt(900-100) + 100;
-        int intr2 =r2.nextInt(900-100) + 100;
-        this.liste.add(new ObjetCercle(50,50,intr1 ,intr2));
+        int intr1 =r1.nextInt(900-200) + 100;
+        int intr2 =r2.nextInt(900-200) + 100;
+        ObjetCercle lastCercle=new ObjetCercle(50,50,intr1 ,intr2);
+        this.liste.add(lastCercle);
+        String myString = "#"+Integer.toHexString(lastCercle.getMyColor().getRGB());
+        StringSelection stringSelection = new StringSelection(myString);
+        Clipboard clpbrd = Toolkit.getDefaultToolkit().getSystemClipboard();
+        clpbrd.setContents(stringSelection, null);
     }
 
     public void mouseEntered(MouseEvent event) {

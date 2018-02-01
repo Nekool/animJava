@@ -3,6 +3,8 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
+import java.awt.datatransfer.*;
+import java.awt.Toolkit;
 
 public class ObjetBoutonSupr extends JButton implements MouseListener {
     private String name;
@@ -32,6 +34,7 @@ public class ObjetBoutonSupr extends JButton implements MouseListener {
                 g.fillRect(0,0, getRootPane().getWidth(), getRootPane().getHeight());
             }
         }
+
     }
 
     public void mouseEntered(MouseEvent event) {
