@@ -1,10 +1,14 @@
 import javax.swing.*;
+import java.awt.*;
 
 
 public class Fenetre extends JFrame{
     private Panneau pan = new Panneau();
-    JButton boutonCarre = new ObjetBoutonAjoutCarre("Création",pan.getCarres());
-    JButton boutonCercle = new ObjetBoutonAjoutCercle("Création",pan.getCarres());
+    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    int widthscreen=screenSize.width;
+    int heightscreen=screenSize.height;
+    JButton boutonCarre = new ObjetBoutonAjoutCarre("Création Carre",pan.getCarres());
+    JButton boutonCercle = new ObjetBoutonAjoutCercle("Création Cercle",pan.getCarres());
     JButton boutonSupr = new ObjetBoutonSupr("Supression",pan.getCarres());
 
     public Fenetre(){
@@ -18,7 +22,7 @@ public class Fenetre extends JFrame{
         pan.add(boutonCarre);
         pan.add(boutonCercle);
         pan.add(boutonSupr);
-        pan.setSize(this.getWidth(),this.getHeight());
+        pan.setSize(widthscreen,heightscreen);
         go();
 
     }
@@ -28,10 +32,10 @@ public class Fenetre extends JFrame{
         for(int i = 0; i <1; i--){
             try {
                 for (AbstractObjectToDraw mon_objet : pan.getCarres()) {
-                    if(mon_objet.getPosX()+mon_objet.getThisHeight()>=this.getHeight()||mon_objet.getPosX()<=0){
+                    if(mon_objet.getPosX()+mon_objet.getThisHeight()>=this.getWidth()||mon_objet.getPosX()<=0){
                         mon_objet.setSpeedX();
                     }
-                    if(mon_objet.getPosY()+mon_objet.getThisWith()>=this.getWidth()||mon_objet.getPosY()<=0){
+                    if(mon_objet.getPosY()+mon_objet.getThisWith()>=this.getHeight()||mon_objet.getPosY()<=0){
                         mon_objet.setSpeedY();
                     }
                     mon_objet.setPosX(mon_objet.getPosX()+mon_objet.getSpeedX());

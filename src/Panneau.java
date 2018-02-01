@@ -7,7 +7,9 @@ import javax.swing.JPanel;
 public class Panneau extends JPanel {
 
     private int i;
-
+    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    int widthscreen=screenSize.width;
+    int heightscreen=screenSize.height;
     public List<AbstractObjectToDraw> getCarres() {
 
         return carres;
@@ -32,6 +34,8 @@ public class Panneau extends JPanel {
         }
         i=carres.size();
         g.drawString(Integer.toString(i), 100, 20);
+        g.drawString(Integer.toString(widthscreen)+" "+Integer.toString(heightscreen), 100, 40);
+
 
     }
 

@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
@@ -6,6 +7,7 @@ import java.util.List;
 public class ObjetBoutonSupr extends JButton implements MouseListener {
     private String name;
     private List liste;
+    Graphics g;
 
     public ObjetBoutonSupr(String str, List liste) {
         super(str);
@@ -16,11 +18,19 @@ public class ObjetBoutonSupr extends JButton implements MouseListener {
     }
 
     public void mouseClicked(MouseEvent event) {
-        System.out.println("Supprime carre");
+        System.out.println("Supprime element");
         try {
             this.liste.remove(this.liste.get(0));
+            System.out.println(Integer.toString(this.liste.size()));
+            if(this.liste.size()<=0){
+                g.fillRect(0,0, getRootPane().getWidth(), getRootPane().getHeight());
+            }
+//            repaint();
         } catch (Exception e) {
             System.out.println("rien a supprimer");
+            if(this.liste == null){
+                g.fillRect(0,0, getRootPane().getWidth(), getRootPane().getHeight());
+            }
         }
     }
 
