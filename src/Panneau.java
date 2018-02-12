@@ -7,6 +7,7 @@ import javax.swing.*;
 public class Panneau extends JPanel {
 
     Panneau(Fenetre fenetre){
+        Point p = MouseInfo.getPointerInfo().getLocation();
         this.setFenetre(fenetre);
     }
     private int i;
@@ -47,8 +48,9 @@ public class Panneau extends JPanel {
         }
         i=liste.size();
         g.drawString(Integer.toString(i), 100, 20);
-        g.drawString(Integer.toString(widthscreen)+" "+Integer.toString(heightscreen), 100, 40);
-
+        if(getMousePosition()!=null) {
+            g.drawString(Integer.toString(getMousePosition().x) + " " + Integer.toString(getMousePosition().y), 100, 40);
+        }
 
     }
 

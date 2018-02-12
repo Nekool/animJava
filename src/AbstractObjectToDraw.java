@@ -49,7 +49,7 @@ abstract class AbstractObjectToDraw implements InterfaceObjectToDraw, MouseListe
         int Low = 1;
         int High = 5;
         int Result = this.r.nextInt(High-Low) + Low;
-        if(this.speedX>0 && this.getPosX()>0){
+        if(this.speedX>0){
             Result=Result * (-1);
             this.speedX = Result;
         }
@@ -66,7 +66,7 @@ abstract class AbstractObjectToDraw implements InterfaceObjectToDraw, MouseListe
         int Low = 1;
         int High = 5;
         int Result = r.nextInt(High-Low) + Low;
-        if(this.speedY>0 && this.getPosY()>0){
+        if(this.speedY>0){
             Result=Result * (-1);
             this.speedY = Result;
         }
@@ -141,13 +141,14 @@ abstract class AbstractObjectToDraw implements InterfaceObjectToDraw, MouseListe
                     }
                 }
             }
-            if(changeDirectionX==false){
+            if(changeDirectionX==false){//collision mur horizontaux
+
                     if(this.getPosX()+this.getthisWidth()>=this.getContext().getWidth()||this.getPosX()<=0){
 
-                        if (this.getthisWidth()>this.getContext().getWidth()){
+                        if (this.getPosX()>this.getContext().getWidth()){
                             this.setPosX(this.getContext().getWidth()-this.getthisWidth());
                         }
-                        if (this.getthisWidth()<0){
+                        if (this.getPosX()<0){
                             this.setPosX(0);
                         }
                         this.setSpeedX();
@@ -160,14 +161,14 @@ abstract class AbstractObjectToDraw implements InterfaceObjectToDraw, MouseListe
 
                     }
             }
-            if(changeDirectionY==false) {
+            if(changeDirectionY==false) {///collision murs verticaux
 
                 if (this.getPosY() + this.getThisHeight() >= this.getContext().getHeight() || this.getPosY() <= 0) {
 
-                    if (this.getThisHeight()>this.getContext().getHeight()){
+                    if (this.getPosY()>this.getContext().getHeight()){
                         this.setPosY(this.getContext().getHeight()-this.getThisHeight());
                     }
-                    if (this.getThisHeight()<0){
+                    if (this.getPosY()<0){
                         this.setPosY(0);
                     }
                     this.setSpeedY();
