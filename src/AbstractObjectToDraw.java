@@ -49,8 +49,8 @@ abstract class AbstractObjectToDraw implements InterfaceObjectToDraw, MouseListe
         int Low = 1;
         int High = 5;
         int Result = this.r.nextInt(High-Low) + Low;
-        if(this.speedX>0&& this.getPosX()>0){
-            Result=Result*(-1);
+        if(this.speedX>0 && this.getPosX()>0){
+            Result=Result * (-1);
             this.speedX = Result;
         }
         else{
@@ -67,7 +67,7 @@ abstract class AbstractObjectToDraw implements InterfaceObjectToDraw, MouseListe
         int High = 5;
         int Result = r.nextInt(High-Low) + Low;
         if(this.speedY>0 && this.getPosY()>0){
-            Result=Result*(-1);
+            Result=Result * (-1);
             this.speedY = Result;
         }
         else{
@@ -119,37 +119,67 @@ abstract class AbstractObjectToDraw implements InterfaceObjectToDraw, MouseListe
         try{
             changeDirectionY=false;
             changeDirectionX=false;
-        for (AbstractObjectToDraw mon_objet : liste) {
-            if (this != mon_objet){
+            for (AbstractObjectToDraw mon_objet : liste) {
+                if (this != mon_objet){
 
-                if (this.getPosX()<=mon_objet.getPosX() &&
-                        mon_objet.getPosX()  <= this.getPosX()+this.getthisWidth()) {
-                    this.setSpeedX();
-                    this.setMyColor();
-                    changeDirectionX=true;
+                    if (this.getPosX()<=mon_objet.getPosX() &&
+                            mon_objet.getPosX()  <= this.posX+this.thisWidth && (this.getPosY()<=mon_objet.getPosY() &&
+                            mon_objet.getPosY()  <= this.getPosY()+this.getThisHeight())) {
+                        this.setPosX(this.getPosX()-this.getSpeedX());
+                        mon_objet.setPosX(mon_objet.getPosX()-mon_objet.getSpeedX());
+                        this.setPosY(this.getPosY()-this.getSpeedY());
+                        mon_objet.setPosY(mon_objet.getPosY()-mon_objet.getSpeedY());
+                        this.setSpeedX();
+                        this.setSpeedY();
+                        mon_objet.setSpeedX();
+                        mon_objet.setSpeedY();
+
+                        this.setMyColor();
+                        changeDirectionX=true;
+                        changeDirectionY=true;
+                        System.out.println("collision avec objet");
+                    }
                 }
-                if (this.getPosY()<=mon_objet.getPosY() &&
-                        mon_objet.getPosY()  <= this.getPosY()+this.getThisHeight()) {
+            }
+            if(changeDirectionX==false){
+                    if(this.getPosX()+this.getthisWidth()>=this.getContext().getWidth()||this.getPosX()<=0){
+
+                        if (this.getthisWidth()>this.getContext().getWidth()){
+                            this.setPosX(this.getContext().getWidth()-this.getthisWidth());
+                        }
+                        if (this.getthisWidth()<0){
+                            this.setPosX(0);
+                        }
+                        this.setSpeedX();
+
+                        this.setMyColor();
+
+                        System.out.println("collision X avec mur");
+
+                        System.out.println(this.getPosX());
+
+                    }
+            }
+            if(changeDirectionY==false) {
+
+                if (this.getPosY() + this.getThisHeight() >= this.getContext().getHeight() || this.getPosY() <= 0) {
+
+                    if (this.getThisHeight()>this.getContext().getHeight()){
+                        this.setPosY(this.getContext().getHeight()-this.getThisHeight());
+                    }
+                    if (this.getThisHeight()<0){
+                        this.setPosY(0);
+                    }
                     this.setSpeedY();
-                    this.setMyColor();
-                    changeDirectionY=true;
-                }
-            }
-           
-        } 
-        if(changeDirectionX==false){
-                if(this.getPosX()+this.getthisWidth()>=this.getContext().getWidth()||this.getPosX()<=0){
-                    this.setSpeedX();
-                    this.setMyColor();
-                }
-        }
-        if(changeDirectionY==false) {
 
-            if (this.getPosY() + this.getThisHeight() >= this.getContext().getHeight() || this.getPosY() <= 0) {
-                this.setSpeedY();
-                this.setMyColor();
+                    this.setMyColor();
+
+                    System.out.println("collision Y avec mur");
+                    System.out.println(this.getPosY());
+
+                }
+
             }
-        }
 
         } catch (Exception e) {
             System.out.println(e);
