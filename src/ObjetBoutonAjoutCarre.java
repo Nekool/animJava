@@ -8,9 +8,28 @@ import java.util.Random;
 public class ObjetBoutonAjoutCarre extends JButton implements MouseListener{
     private String name;
     private List liste;
-    public ObjetBoutonAjoutCarre(String str ,List liste){
+
+    public List getListe() {
+        return liste;
+    }
+
+    public void setListe(List liste) {
+        this.liste = liste;
+    }
+
+    public Panneau getContext() {
+        return context;
+    }
+
+    public void setContext(Panneau context) {
+        this.context = context;
+    }
+
+    private Panneau context;
+    public ObjetBoutonAjoutCarre(String str ,List liste,Panneau context){
         super(str);
-        this.liste=liste;
+        this.setListe(liste);
+        this.setContext(context);
         this.name = "creation";
         this.addMouseListener(this);
         this.setBounds(550, 100, 100, 60);
@@ -21,7 +40,7 @@ public class ObjetBoutonAjoutCarre extends JButton implements MouseListener{
 //        ObjetCarre carre=new ObjetCarre(50,50,5 ,5);
         int intr1 =r1.nextInt(900-100) + 100;
         int intr2 =r2.nextInt(900-100) + 100;
-        this.liste.add(new ObjetCarre(50,50,intr1 ,intr2));
+        this.liste.add(new ObjetCarre(50,50,intr1 ,intr2,this.getContext()));
     }
 
     public void mouseEntered(MouseEvent event) {

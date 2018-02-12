@@ -1,17 +1,16 @@
 import javax.swing.*;
 import java.awt.*;
 
-
-public class Fenetre extends JFrame{
-    private Panneau pan = new Panneau();
+public class Fenetre extends JFrame {
+    private Panneau pan = new Panneau(this);
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    int widthscreen=screenSize.width;
-    int heightscreen=screenSize.height;
-    JButton boutonCarre = new ObjetBoutonAjoutCarre("Création Carre",pan.getCarres());
-    JButton boutonCercle = new ObjetBoutonAjoutCercle("Création Cercle",pan.getCarres());
-    JButton boutonSupr = new ObjetBoutonSupr("Supression",pan.getCarres());
+    int widthscreen = screenSize.width;
+    int heightscreen = screenSize.height;
+    JButton boutonCarre = new ObjetBoutonAjoutCarre("Création Carre", pan.getListe(), pan);
+    JButton boutonCercle = new ObjetBoutonAjoutCercle("Création Cercle", pan.getListe(), pan);
+    JButton boutonSupr = new ObjetBoutonSupr("Supression", pan.getListe());
 
-    public Fenetre(){
+    public Fenetre() {
         this.setTitle("Animation");
         this.setLayout(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -22,36 +21,25 @@ public class Fenetre extends JFrame{
         pan.add(boutonCarre);
         pan.add(boutonCercle);
         pan.add(boutonSupr);
-        pan.setSize(widthscreen,heightscreen);
+        pan.setSize(widthscreen, heightscreen);
         go();
-
     }
-    private void go(){
-        int deplacementX =2,deplacementY=1;
-        for(int i = 0; i <1; i--){
+
+    private void go() {
+        int deplacementX = 2, deplacementY = 1;
+        for (int i = 0; i < 1; i--) {
             try {
-                for (AbstractObjectToDraw mon_objet : pan.getCarres()) {
-                    if(mon_objet.getPosX()+mon_objet.getThisWith()>=this.getWidth()||mon_objet.getPosX()<=0){
-                        mon_objet.setSpeedX();
-                        mon_objet.setMyColor();
-
+                if (pan.getListe() != null) {
+                    for (AbstractObjectToDraw mon_objet : pan.getListe()) {
+                        mon_objet.mouvement();
                     }
-                    if(mon_objet.getPosY()+mon_objet.getThisHeight()>=this.getHeight()||mon_objet.getPosY()<=0){
-                        mon_objet.setSpeedY();
-                        mon_objet.setMyColor();
-
-                    }
-                    mon_objet.setPosX(mon_objet.getPosX()+mon_objet.getSpeedX());
-                    mon_objet.setPosY(mon_objet.getPosY()+mon_objet.getSpeedY());
-
+                    pan.repaint();
+                    Thread.sleep(1000 / 60);
                 }
-                pan.repaint();
-                Thread.sleep(1000/60);
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
         }
     }
 }

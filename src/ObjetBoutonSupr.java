@@ -41,7 +41,6 @@ public class ObjetBoutonSupr extends JButton implements MouseListener {
 
     }
 
-
     public void mouseExited(MouseEvent event) {
 
     }

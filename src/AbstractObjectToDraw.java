@@ -1,17 +1,25 @@
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.List;
 import java.util.Random;
 import java.awt.Color;
 
-abstract class AbstractObjectToDraw implements InterfaceObjectToDraw{
+abstract class AbstractObjectToDraw implements InterfaceObjectToDraw, MouseListener {
     private int posX ;
     private int speedX ;
 
     private int posY ;
     private int speedY ;
 
-    private int thisWith;
-    private int thisHeight;
+    private Panneau context;
 
+    private int thisWidth;
+    private int thisHeight;
+    boolean changeDirectionX;
+
+    boolean changeDirectionY;
     private Random r;
     private Color myColor;
     private RandomColor couleur;
@@ -27,10 +35,12 @@ abstract class AbstractObjectToDraw implements InterfaceObjectToDraw{
     public int getSpeedX() {
         return speedX;
     }
+
     public void setMyColor(){
 
         this.myColor=couleur.CreateRandomColor(256);
     }
+
     public Color getMyColor(){
         return myColor;
     }
@@ -42,7 +52,6 @@ abstract class AbstractObjectToDraw implements InterfaceObjectToDraw{
         if(this.speedX>0&& this.getPosX()>0){
             Result=Result*(-1);
             this.speedX = Result;
-//            this.setMyColor();
         }
         else{
             this.speedX = Result;
@@ -60,7 +69,6 @@ abstract class AbstractObjectToDraw implements InterfaceObjectToDraw{
         if(this.speedY>0 && this.getPosY()>0){
             Result=Result*(-1);
             this.speedY = Result;
-//            this.setMyColor();
         }
         else{
             this.speedY = Result;
@@ -82,12 +90,12 @@ abstract class AbstractObjectToDraw implements InterfaceObjectToDraw{
         this.posY = posY;
     }
 
-    public int getThisWith() {
-        return thisWith;
+    public int getthisWidth() {
+        return thisWidth;
     }
 
-    public void setThisWith(int thisWith) {
-        this.thisWith = thisWith;
+    public void setthisWidth(int thisWidth) {
+        this.thisWidth = thisWidth;
     }
 
     public int getThisHeight() {
@@ -98,9 +106,63 @@ abstract class AbstractObjectToDraw implements InterfaceObjectToDraw{
         this.thisHeight = thisHeight;
     }
 
-    public void ObjectToDraw(int thisHeight,int thisWith,int posX,int posY){
+    public Panneau getContext() {
+        return context;
+    }
+
+    public void setContext(Panneau context) {
+        this.context = context;
+    }
+
+    public void colision(List<AbstractObjectToDraw> liste) {
+
+        try{
+            changeDirectionY=false;
+            changeDirectionX=false;
+        for (AbstractObjectToDraw mon_objet : liste) {
+            if (this != mon_objet){
+
+                if (this.getPosX()<=mon_objet.getPosX() &&
+                        mon_objet.getPosX()  <= this.getPosX()+this.getthisWidth()) {
+                    this.setSpeedX();
+                    this.setMyColor();
+                    changeDirectionX=true;
+                }
+                if (this.getPosY()<=mon_objet.getPosY() &&
+                        mon_objet.getPosY()  <= this.getPosY()+this.getThisHeight()) {
+                    this.setSpeedY();
+                    this.setMyColor();
+                    changeDirectionY=true;
+                }
+            }
+           
+        } 
+        if(changeDirectionX==false){
+                if(this.getPosX()+this.getthisWidth()>=this.getContext().getWidth()||this.getPosX()<=0){
+                    this.setSpeedX();
+                    this.setMyColor();
+                }
+        }
+        if(changeDirectionY==false) {
+
+            if (this.getPosY() + this.getThisHeight() >= this.getContext().getHeight() || this.getPosY() <= 0) {
+                this.setSpeedY();
+                this.setMyColor();
+            }
+        }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    public void mouvement(){
+        this.colision(this.context.getListe());
+        this.setPosX(this.getPosX()+this.getSpeedX());
+        this.setPosY(this.getPosY()+this.getSpeedY());
+    }
+    public void ObjectToDraw(int thisHeight, int thisWidth, int posX, int posY, Panneau context, List liste){
         this.setThisHeight(thisHeight);
-        this.setThisWith(thisWith);
+        this.setthisWidth(thisWidth);
         this.setPosX(posX);
         this.setPosY(posY);
         this.setR();
@@ -108,8 +170,23 @@ abstract class AbstractObjectToDraw implements InterfaceObjectToDraw{
         this.getMyColor();
         this.setSpeedX();
         this.setSpeedY();
-    }
-    public void  drawMe(Graphics g){
+        this.setContext(context);
 
     }
+
+    /**
+     * Méthode pour dessiner l'oblet
+     * @param g
+     */
+    public abstract void drawMe(Graphics g);
+
+    public abstract void mouseClicked(MouseEvent event);
+
+    public abstract void mouseEntered(MouseEvent event);
+
+    public abstract void mouseExited(MouseEvent event);
+
+    public abstract void mousePressed(MouseEvent event);
+
+    public abstract void mouseReleased(MouseEvent event);
 }
